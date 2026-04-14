@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Loay API Docs</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  display: flex;
+  background: #0f172a;
+  color: white;
+}
+
+/* sidebar */
+.sidebar {
+  width: 250px;
+  background: #020617;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar a {
+  display: block;
+  color: #cbd5f5;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.main {
+  margin-left: 260px;
+  padding: 30px;
+  width: 100%;
+}
+
+.card {
+  background: #020617;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background: #38bdf8;
+  color: black;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.code {
+  background: #020617;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #1e293b;
+  color: #38bdf8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>🚀 Loay API</h2>
+  <a href="#login">Login</a>
+  <a href="#send">Send</a>
+  <a href="#api">API Key</a>
+</div>
+
+<div class="main">
+
+<h1>🔥 Loay API System</h1>
+
+<!-- تسجيل دخول -->
+<div class="card" id="login">
+  <h2>🔐 Login</h2>
+  <input type="text" id="user" placeholder="Username">
+  <input type="password" id="pass" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p id="loginStatus"></p>
+</div>
+
+<!-- API KEY -->
+<div class="card" id="api">
+  <h2>🔑 API Key</h2>
+  <button onclick="generateKey()">Generate Key</button>
+  <div class="code" id="apiKey">No Key</div>
+</div>
+
+<!-- إرسال واتساب -->
+<div class="card" id="send">
+  <h2>📩 Send WhatsApp</h2>
+  <input type="text" id="number" placeholder="رقم الهاتف">
+  <input type="text" id="message" placeholder="الرسالة">
+
+  <button onclick="sendWhats()">Send</button>
+</div>
+
+<!-- تجربة API -->
+<div class="card">
+  <h2>⚡ Try API</h2>
+  <button onclick="testAPI()">Test</button>
+  <div class="code" id="result"></div>
+</div>
+
+</div>
+
+<script>
+
+function login() {
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
+
+  if(u === "loay" && p === "1234"){
+    document.getElementById("loginStatus").innerText = "تم تسجيل الدخول ✅";
+  } else {
+    document.getElementById("loginStatus").innerText = "خطأ ❌";
+  }
+}
+
+function generateKey(){
+  let key = "LOAY-" + Math.random().toString(36).substring(2,10);
+  document.getElementById("apiKey").innerText = key;
+}
+
+function sendWhats(){
+  let num = document.getElementById("number").value;
+  let msg = document.getElementById("message").value;
+
+  let url = "https://wa.me/" + num + "?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
+}
+
+function testAPI(){
+  document.getElementById("result").innerText =
+  JSON.stringify({
+    status: "success",
+    message: "API working 🔥",
+    owner: "Loay"
+  }, null, 2);
+}
+
+</script>
+
+</body>
+</html>
